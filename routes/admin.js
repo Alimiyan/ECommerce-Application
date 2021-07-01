@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var productHelpers = require('../helpers/product-helpers')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -43,6 +44,9 @@ router.get('/add-products', function(req,res){
 router.post('/add-products', (req, res)=>{
   console.log(req.body)
   console.log(req.files.Image)
+  productHelpers.addProduct(req.body,(req.body,(result)=>{
+    res.render("admin/add-products")
+  }))
 })
 
 module.exports = router;
