@@ -5,7 +5,7 @@ module.exports = {
         console.log(product)
 
         db.get().collection('product').insertOne(product).then((data)=>{
-            console.log(data)
+            console.log(data) //full data in 'data'
             callback(data.ops[0]._id)
         })
     }
