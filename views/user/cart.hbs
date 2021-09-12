@@ -11,19 +11,21 @@
             <tbody>
                 {{#each products}}
                 <tr>
-                    {{#each this.products}}
-                    <td><img style="width: 70px;height: 70px;" src="/product-images/{{this._id}}.jpg" alt=""></td>
-                    <td>{{this.Name}}</td>
-                    {{/each}}
+                    <td><img style="width: 70px;height: 70px;" src="/product-images/{{this.products._id}}.jpg" alt=""></td>
+                    <td>{{this.products.Name}}</td> 
+                    
                     <td>
-                        <button class="cart-items-count mr-3">-</button>{{this.quantity}}<button class="cart-items-count ml-3">+</button>
+                        <button name="btnp" class="cart-items-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',-1)">-</button>{{this.quantity}}<button class="cart-items-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',1)">+</button>
                     </td>
                     <td>
                         <a href="" class="btn btn-danger">Remove</a>
                     </td>
                 {{/each}}
-                </tr>
+                </tr>   
             </tbody>
         </table>
     </div>
 </section>
+<script>
+   
+</script>

@@ -80,4 +80,10 @@ router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
     //res.redirect('/')
   })
 })
+
+router.post('/change-product-quantity',(req,res,next)=>{
+  userHelpers.changeProductQuantity(req.body).then(()=>{
+    res.json({status:true})
+  })
+})
 module.exports = router;

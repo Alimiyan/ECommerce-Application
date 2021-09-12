@@ -49,7 +49,7 @@ module.exports ={
               let proExist = userCart.products.findIndex(products=> products.item==proId)
               if(proExist!= -1){
                   db.get().collection(collection.CART_COLLECTIONS)
-                  .updateOne({'products.item':objectId(proId)},
+                  .updateOne({user:objectId(userId),'products.item':objectId(proId)},
                   {
                       $inc:{'products.$.quantity':1}
                   }
@@ -100,6 +100,13 @@ module.exports ={
                         foreignField: '_id',
                         as: 'products'
                     }
+                },
+                {
+                    $project:{
+                        item:1,
+                        quantity:1,
+                        products:{$arrayElemAt:['$products',0]}
+                    }
                 }
             ]).toArray()
             resolve(cartItems)
@@ -114,6 +121,21 @@ module.exports ={
                 count=cart.products.length
             }
             resolve(count)
+        })
+    },
+
+    changeProductQuantity:(details)=>{
+        count = parseInt(details.count)
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.CART_COLLECTIONS)
+            .updateOne({_id:objectId(details.cart),'products.item':objectId(details.product)},
+            {
+                $inc:{'products.$.quantity':count}
+            }
+            ).then((respone)=>{
+                console.log(response)
+                resolve()
+            })
         })
     }
     
