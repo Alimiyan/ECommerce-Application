@@ -1,3 +1,4 @@
+const { response } = require('express');
 var express = require('express');
 const { isHttpError } = require('http-errors');
 var router = express.Router();
@@ -82,8 +83,16 @@ router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
 })
 
 router.post('/change-product-quantity',(req,res,next)=>{
-  userHelpers.changeProductQuantity(req.body).then(()=>{
-    res.json({status:true})
+  console.log(req.body)
+  userHelpers.changeProductQuantity(req.body).then((response)=>{
+    res.json(response)
   })
 })
+
+router.post('/remove-product',(req,res,next)=>{
+  userHelpers.removeProduct(req.body).then((response)=>{
+    res.json(response)
+  })
+})
+
 module.exports = router;
