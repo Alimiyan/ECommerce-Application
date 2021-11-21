@@ -15,7 +15,7 @@ function addToCart(proId){
     })
   }
 
-  function changeQuantity(cartId,proId,count){
+  function changeQuantity(cartId,proId,userId,count){
     let quantity=parseInt(document.getElementById(proId).innerHTML)
     count=parseInt(count)
     $.ajax({
@@ -24,7 +24,8 @@ function addToCart(proId){
             cart:cartId,
             product:proId,
             count:count,
-            quantity:quantity
+            quantity:quantity,
+            user:userId
         },
         method:'post',
         success:(response)=>{
@@ -33,7 +34,8 @@ function addToCart(proId){
                 location.reload()
             }else{
               document.getElementById(proId).innerHTML=quantity+count
-              location.reload()
+              document.getElementById('total').innerHTML=response.total
+              
             }
         }
     })
